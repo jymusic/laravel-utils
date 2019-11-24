@@ -1,0 +1,24 @@
+{
+    "name": "jymusic/laravel-utils",
+    "description": "jymusic laravel utils",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "JYmusic",
+            "email": "zhangcb1984@163.com"
+        }
+    ],
+    "require": {
+	    "php": ">=7.0",
+		"laravel/framework": "^5.5"
+	},
+	"autoload": {
+		"psr-4": {
+		  "JYmusic\\LaravelUtils\\": "src/",
+		},
+		"files": [
+		  "src/helpers.php"
+		]
+	}
+}
