@@ -15,10 +15,10 @@
 	},
 	"autoload": {
 		"psr-4": {
-		  "JYmusic\\LaravelUtils\\": "src/",
+		  "JYmusic\\Utils\\": "src/"
 		},
 		"files": [
-		  "src/helpers.php"
+		  "src/Helpers.php"
 		]
 	}
 }
