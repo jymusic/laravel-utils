@@ -4,6 +4,7 @@ namespace JYmusic\Utils;
 
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Validator;
 use JYmusic\Utils\JavaScript\Transformer;
 
 class UtilsServiceProvider extends ServiceProvider
