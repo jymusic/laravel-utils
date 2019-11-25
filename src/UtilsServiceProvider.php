@@ -32,7 +32,7 @@ class UtilsServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/config/utils.php' => config_path('uitls.php')
+            __DIR__ . '/config/utils.php' => config_path('utils.php')
         ]);
 
         // 添加自定义验证
