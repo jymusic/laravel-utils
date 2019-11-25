@@ -20,5 +20,15 @@
 		"files": [
 		  "src/Helpers.php"
 		]
-	}
+  },
+  "extra": {
+    "laravel": {
+        "providers": [
+          "JYmusic\\Utils\\UtilsServiceProvider"
+        ],
+        "aliases": {
+          "Utils": "JYmusic\\Utils\\Facade\\Utils"
+        }
+    }
+  }
 }

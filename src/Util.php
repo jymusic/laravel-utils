@@ -2,6 +2,8 @@
 
 namespace JYmusic\Utils;
 
+use JYmusic\Utils\JavaScript\Transformer;
+
 class Util
 {
     /**
@@ -328,4 +330,26 @@ class Util
         }
         return base64_decode($str);
     }
+
+    /**
+     * Undocumented function
+     *
+     * @param mixed  $var
+     * @param string $namespace
+     * @return string
+     */
+    public function javascript($var, $namespace = null)
+    {
+        $namespace = is_null($namespace) ? config('utils.js_namespace', 'window') : $namespace;
+
+        $transformer = new Transformer(
+            new LaravelViewBinder(app('events'), config('utils.bind_js_vars_to_this_view')),
+            $namespace
+        );
+
+        $transformer->put($var);
+
+        return $transformer;
+    }
+
 }

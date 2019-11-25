@@ -191,19 +191,19 @@ if (!function_exists('rules_to_messages')) {
      *
      * @return string
      */
-    function rules_to_messages($rules)
+    function rules_messages($rules)
     {
         return Util::rulesToMessages($rules);
     }
 }
 
-if (!function_exists('number_to_chinese')) {
+if (!function_exists('number_chinese')) {
     /**
      * 数字转中文大写
      *
      * @return string
      */
-    function number_to_chinese($number, $isRmb = false)
+    function number_chinese($number, $isRmb = false)
     {
         return Util::numberToChinese($number, $isRmb = false);
     }
