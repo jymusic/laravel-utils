@@ -6,6 +6,7 @@ use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Validator;
 use JYmusic\Utils\JavaScript\Transformer;
+use Illuminate\Routing\Events\RouteMatched;
 
 class UtilsServiceProvider extends ServiceProvider
 {
