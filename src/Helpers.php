@@ -132,22 +132,6 @@ if (! function_exists('array_get')) {
     }
 }
 
-if (!function_exists('active_class')) {
-    /**
-     * Get the active class if the condition is not falsy
-     *
-     * @param        $condition
-     * @param string $activeClass
-     * @param string $inactiveClass
-     *
-     * @return string
-     */
-    function active_class($condition, $activeClass = 'active', $inactiveClass = '')
-    {
-        return (new Active)->getClassIf($condition, $activeClass, $inactiveClass);
-    }
-}
-
 if (! function_exists('array_has')) {
     /**
      * Check if an item or items exist in an array using "dot" notation.
