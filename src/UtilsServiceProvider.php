@@ -9,6 +9,28 @@ use JYmusic\Utils\JavaScript\Transformer;
 
 class UtilsServiceProvider extends ServiceProvider
 {
+	/**
+     * Publish the plugin configuration.
+     */
+    public function boot()
+    {
+        $this->publishes([
+            __DIR__ . '/config/utils.php' => config_path('utils.php')
+        ]);
+		
+		// Update the instances each time a request is resolved and a route is matched
+        $instance = app('active');
+
+		app('router')->matched(
+			function (RouteMatched $event) use ($instance) {
+				$instance->updateInstances($event->route, $event->request);
+			}
+		);
+
+        // 添加自定义验证
+        $this->extendValidator();
+    }
+	
     /**
      * Register the service provider.
      *
@@ -24,19 +46,10 @@ class UtilsServiceProvider extends ServiceProvider
             __DIR__ . '/config/utils.php',
             'utils'
         );
-    }
-
-    /**
-     * Publish the plugin configuration.
-     */
-    public function boot()
-    {
-        $this->publishes([
-            __DIR__ . '/config/utils.php' => config_path('utils.php')
-        ]);
-
-        // 添加自定义验证
-        $this->extendValidator();
+		
+		$this->app->singleton('active', function ($app) {
+            return new Active($app['router']->getCurrentRequest());
+        });
     }
 
     /**

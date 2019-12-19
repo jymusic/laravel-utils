@@ -7,79 +7,53 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Str;
 
-/**
- * Return "active" class for the current route if needed
- *
- * Check the current route to decide whether return an "active" class base on:
- * <ul>
- *   <li>current route URI</li>
- *   <li>current route name</li>
- *   <li>current action</li>
- *   <li>current controller</li>
- * </ul>
- *
- * @package    HieuLe\Active
- * @author     Hieu Le <letrunghieu.cse09@gmail.com>
- * @version    3.2.0
- *
- */
 class Active
 {
-
     /**
      * Current request
      *
      * @var Request
      */
     protected $request;
-
     /**
      * Current matched route
      *
      * @var Route
      */
     protected $route;
-
     /**
      * Current action string
      *
      * @var string
      */
     protected $action;
-
     /**
      * Current controller class
      *
      * @var string
      */
     protected $controller;
-
     /**
      * Current controller method
      *
      * @var string
      */
     protected $method;
-
     /**
      * Current URI
      *
      * @var string
      */
     protected $uri;
-
     /**
      * Active constructor.
      *
      * @param Request $request current request instance
      */
-    public function __construct($request = null )
+    public function __construct($request)
     {
-        $request = app('router')->getCurrentRequest();
-
         $this->updateInstances(null, $request);
     }
-
     /**
      * Update the route and request instances
      *
@@ -92,17 +66,14 @@ class Active
         if ($request) {
             $this->uri = urldecode($request->path());
         }
-
         $this->route = $route;
         if ($route) {
             $this->action = $route->getActionName();
-
             $actionSegments   = Str::parseCallback($this->action, null);
             $this->controller = head($actionSegments);
             $this->method     = last($actionSegments);
         }
     }
-
     /**
      * Get the active class if the condition is not falsy
      *
@@ -116,7 +87,6 @@ class Active
     {
         return $condition ? $activeClass : $inactiveClass;
     }
-
     /**
      * Check if the URI of the current request matches one of the specific URIs
      *
@@ -129,18 +99,15 @@ class Active
         if (!$this->request) {
             return false;
         }
-
         foreach ((array)$uris as $uri) {
             if ($this->uri == $uri) {
                 return true;
             }
         }
-
         return false;
     }
-
     /**
-     * Check if the current URI matches one of specific patterns (using `Str::is`)
+     * Check if the current URI matches one of specific patterns (using `str_is`)
      *
      * @param array|string $patterns
      *
@@ -151,16 +118,13 @@ class Active
         if (!$this->request) {
             return false;
         }
-
         foreach ((array)$patterns as $p) {
-            if (Str::is($p, $this->uri)) {
+            if (str_is($p, $this->uri)) {
                 return true;
             }
         }
-
         return false;
     }
-
     /**
      * Check if one of the following condition is true:
      * + the value of $value is `false` and the current querystring contain the key $key
@@ -178,9 +142,7 @@ class Active
         if (!$this->request) {
             return false;
         }
-
         $queryValue = $this->request->query($key);
-
         // if the `key` exists in the query string with the correct value
         // OR it exists with any value
         // OR its value is an array that contains the specific value
@@ -189,10 +151,8 @@ class Active
         ) {
             return true;
         }
-
         return false;
     }
-
     /**
      * Check if the name of the current route matches one of specific values
      *
@@ -205,16 +165,12 @@ class Active
         if (!$this->route) {
             return false;
         }
-
         $routeName = $this->route->getName();
-
         if (in_array($routeName, (array)$routeNames)) {
             return true;
         }
-
         return false;
     }
-
     /**
      * Check the current route name with one or some patterns
      *
@@ -227,22 +183,17 @@ class Active
         if (!$this->route) {
             return false;
         }
-
         $routeName = $this->route->getName();
-
         if ($routeName == null) {
             return in_array(null, $patterns);
         }
-
         foreach ((array)$patterns as $p) {
-            if (Str::is($p, $routeName)) {
+            if (str_is($p, $routeName)) {
                 return true;
             }
         }
-
         return false;
     }
-
     /**
      * Check if the parameter of the current route has the correct value
      *
@@ -256,18 +207,14 @@ class Active
         if (!$this->route) {
             return false;
         }
-
         $paramValue = $this->route->parameter($param);
-
         // If the parameter value is an instance of Model class, we compare $value with the value of
         // its primary key.
         if (is_a($paramValue, Model::class)) {
             return $paramValue->{$paramValue->getKeyName()} == $value;
         }
-
         return $paramValue == $value;
     }
-
     /**
      * Return 'active' class if current route action match one of provided action names
      *
@@ -280,14 +227,11 @@ class Active
         if (!$this->action) {
             return false;
         }
-
         if (in_array($this->action, (array)$actions)) {
             return true;
         }
-
         return false;
     }
-
     /**
      * Check if the current controller class matches one of specific values
      *
@@ -300,14 +244,11 @@ class Active
         if (!$this->controller) {
             return false;
         }
-
         if (in_array($this->controller, (array)$controllers)) {
             return true;
         }
-
         return false;
     }
-
     /**
      * Get the current controller method
      *
@@ -317,7 +258,6 @@ class Active
     {
         return $this->method ?: "";
     }
-
     /**
      * Get the current action string
      *
@@ -327,7 +267,6 @@ class Active
     {
         return $this->action ?: "";
     }
-
     /**
      * Get the current controller class
      *
@@ -337,5 +276,4 @@ class Active
     {
         return $this->controller ?: "";
     }
-
 }

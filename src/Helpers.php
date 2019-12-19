@@ -575,9 +575,24 @@ if (! function_exists('studly_case')) {
     }
 }
 
+if (!function_exists('active_class')) {
+    /**
+     * Get the active class if the condition is not falsy
+     *
+     * @param        $condition
+     * @param string $activeClass
+     * @param string $inactiveClass
+     *
+     * @return string
+     */
+    function active_class($condition, $activeClass = 'active', $inactiveClass = '')
+    {
+        return app('active')->getClassIf($condition, $activeClass, $inactiveClass);
+    }
+}
 if (!function_exists('if_uri')) {
     /**
-     * 检查当前请求的URI是否与特定URI之一匹配
+     * Check if the URI of the current request matches one of the specific URIs
      *
      * @param array|string $uris
      *
@@ -585,13 +600,12 @@ if (!function_exists('if_uri')) {
      */
     function if_uri($uris)
     {
-        return (new Active)->checkUri($uris);
+        return app('active')->checkUri($uris);
     }
 }
-
 if (!function_exists('if_uri_pattern')) {
     /**
-     * 检查当前URI是否与特定模式之一匹配 (使用 `str_is`)
+     * Check if the current URI matches one of specific patterns (using `str_is`)
      *
      * @param array|string $patterns
      *
@@ -599,10 +613,9 @@ if (!function_exists('if_uri_pattern')) {
      */
     function if_uri_pattern($patterns)
     {
-        return (new Active)->checkUriPattern($patterns);
+        return app('active')->checkUriPattern($patterns);
     }
 }
-
 if (!function_exists('if_query')) {
     /**
      * Check if one of the following condition is true:
@@ -618,13 +631,12 @@ if (!function_exists('if_query')) {
      */
     function if_query($key, $value)
     {
-        return (new Active)->checkQuery($key, $value);
+        return app('active')->checkQuery($key, $value);
     }
 }
-
 if (!function_exists('if_route')) {
     /**
-     * 检查当前路由名称是否与特定值之一匹配
+     * Check if the name of the current route matches one of specific values
      *
      * @param array|string $routeNames
      *
@@ -632,13 +644,12 @@ if (!function_exists('if_route')) {
      */
     function if_route($routeNames)
     {
-        return (new Active)->checkRoute($routeNames);
+        return app('active')->checkRoute($routeNames);
     }
 }
-
 if (!function_exists('if_route_pattern')) {
     /**
-     * 使用一种或某些模式检查当前路由名称
+     * Check the current route name with one or some patterns
      *
      * @param array|string $patterns
      *
@@ -646,13 +657,12 @@ if (!function_exists('if_route_pattern')) {
      */
     function if_route_pattern($patterns)
     {
-        return (new Active)->checkRoutePattern($patterns);
+        return app('active')->checkRoutePattern($patterns);
     }
 }
-
 if (!function_exists('if_route_param')) {
     /**
-     * 检查当前路径的参数值是否正确
+     * Check if the parameter of the current route has the correct value
      *
      * @param $param
      * @param $value
@@ -661,13 +671,12 @@ if (!function_exists('if_route_param')) {
      */
     function if_route_param($param, $value)
     {
-        return (new Active)->checkRouteParam($param, $value);
+        return app('active')->checkRouteParam($param, $value);
     }
 }
-
 if (!function_exists('if_action')) {
     /**
-     * 如果当前路线动作与提供的动作名称之一匹配，则返回 "active" 类
+     * Return 'active' class if current route action match one of provided action names
      *
      * @param array|string $actions
      *
@@ -675,10 +684,9 @@ if (!function_exists('if_action')) {
      */
     function if_action($actions)
     {
-        return (new Active)->checkAction($actions);
+        return app('active')->checkAction($actions);
     }
 }
-
 if (!function_exists('if_controller')) {
     /**
      * Check if the current controller class matches one of specific values
@@ -689,10 +697,9 @@ if (!function_exists('if_controller')) {
      */
     function if_controller($controllers)
     {
-        return (new Active)->checkController($controllers);
+        return app('active')->checkController($controllers);
     }
 }
-
 if (!function_exists('current_controller')) {
     /**
      * Get the current controller class
@@ -701,10 +708,9 @@ if (!function_exists('current_controller')) {
      */
     function current_controller()
     {
-        return (new Active)->getController();
+        return app('active')->getController();
     }
 }
-
 if (!function_exists('current_method')) {
     /**
      * Get the current controller method
@@ -713,10 +719,9 @@ if (!function_exists('current_method')) {
      */
     function current_method()
     {
-        return (new Active)->getMethod();
+        return app('active')->getMethod();
     }
 }
-
 if (!function_exists('current_action')) {
     /**
      * Get the current action string
@@ -725,7 +730,7 @@ if (!function_exists('current_action')) {
      */
     function current_action()
     {
-        return (new Active)->getAction();
+        return app('active')->getAction();
     }
 }
 
