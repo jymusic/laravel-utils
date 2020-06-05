@@ -119,7 +119,7 @@ class Active
             return false;
         }
         foreach ((array)$patterns as $p) {
-            if (str_is($p, $this->uri)) {
+            if (Str::is($p, $this->uri)) {
                 return true;
             }
         }

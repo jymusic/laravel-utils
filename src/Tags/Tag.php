@@ -77,10 +77,29 @@ class Tag extends Model implements Sortable
         if (! $tag) {
             $tag = static::create([
                 'name' => $name,
+				'slug' => $this->parseSlug($name),
                 'type' => $type,
             ]);
         }
 
         return $tag;
+    }
+	
+	/**
+     * 解析 slug
+     *
+     * @param  string  $val
+     * @param  boolean $isAbbr
+     *
+     * @return string
+     */
+    function parseSlug($name)
+    {
+        // 判断是否是中文
+        if (preg_match("/[\x7f-\xff]/", $val)) {
+            $pinyin = new \Overtrue\Pinyin\Pinyin();
+            return $pinyin->abbr($val);
+        }
+        return strtolower($val);
     }
 }
