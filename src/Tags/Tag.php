@@ -77,7 +77,7 @@ class Tag extends Model implements Sortable
         if (! $tag) {
             $tag = static::create([
                 'name' => $name,
-				'slug' => $this->parseSlug($name),
+				'slug' => static::parseSlug($name),
                 'type' => $type,
             ]);
         }
@@ -93,7 +93,7 @@ class Tag extends Model implements Sortable
      *
      * @return string
      */
-    function parseSlug($name)
+    protected static function parseSlug($name)
     {
         // 判断是否是中文
         if (preg_match("/[\x7f-\xff]/", $val)) {
