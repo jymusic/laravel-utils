@@ -30,7 +30,9 @@
           "JYmusic\\Utils\\UtilsServiceProvider"
         ],
         "aliases": {
-          "Utils": "JYmusic\\Utils\\Facade\\Utils"
+          "Utils": "JYmusic\\Utils\\Facades\\Utils",
+          "Active": "JYmusic\\Utils\\Facades\\Active",
+          "Javascript": "JYmusic\\Utils\\Facades\\Javascript"
         }
     }
   }

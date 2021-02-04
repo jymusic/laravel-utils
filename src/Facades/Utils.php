@@ -1,6 +1,6 @@
 <?php
 
-namespace JYmusic\Utils\Facade;
+namespace JYmusic\Utils\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
