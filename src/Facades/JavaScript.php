@@ -4,14 +4,14 @@ namespace JYmusic\Utils\Facade;
 
 use Illuminate\Support\Facades\Facade;
 /**
- * Active facade class
+ * JavaScript facade class
  *
  * @author jymusic
  */
-class Active extends Facade
+class JavaScript extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'active';
+        return 'javaScript';
     }
 }

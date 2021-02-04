@@ -1,6 +1,6 @@
 <?php
 
-namespace JYmusic\Utils\JavaScript;
+namespace JYmusic\Utils\Transformers;
 
 use Exception;
 use JYmusic\Utils\ViewBinder;

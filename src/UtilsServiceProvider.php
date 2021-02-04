@@ -5,7 +5,7 @@ namespace JYmusic\Utils;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Validator;
-use JYmusic\Utils\JavaScript\Transformer;
+use JYmusic\Utils\Transformers\Transformer;
 use Illuminate\Routing\Events\RouteMatched;
 
 class UtilsServiceProvider extends ServiceProvider
@@ -41,6 +41,13 @@ class UtilsServiceProvider extends ServiceProvider
     {
         $this->app->singleton('utils', function() {
             return  new Util();
+        });
+		
+		$this->app->singleton('JavaScript', function ($app) {
+            return new Transformer(
+                new LaravelViewBinder($app['events'], config('utils.bind_js_vars_to_this_view')),
+                config('utils.js_namespace')
+            );
         });
 
         $this->mergeConfigFrom(

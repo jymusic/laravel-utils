@@ -13,6 +13,6 @@ class Utils extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return \JYmusic\Utils\Util::class;
+        return 'utils';
     }
 }
