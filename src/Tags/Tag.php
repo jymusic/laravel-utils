@@ -89,7 +89,6 @@ class Tag extends Model implements Sortable
      * 解析 slug
      *
      * @param  string  $val
-     *
      * @return string
      */
     protected static function parseSlug($val)
@@ -102,3 +101,4 @@ class Tag extends Model implements Sortable
         return strtolower($val);
     }
 }
+
