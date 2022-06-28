@@ -84,16 +84,15 @@ class Tag extends Model implements Sortable
 
         return $tag;
     }
-	
+
 	/**
      * 解析 slug
      *
      * @param  string  $val
-     * @param  boolean $isAbbr
      *
      * @return string
      */
-    protected static function parseSlug($name)
+    protected static function parseSlug($val)
     {
         // 判断是否是中文
         if (preg_match("/[\x7f-\xff]/", $val)) {
